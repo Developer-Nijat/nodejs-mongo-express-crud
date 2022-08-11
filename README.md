@@ -14,5 +14,7 @@ Features:
 10. Rootpath
 
 Developed by Nijat Aliyev.
+
 Email: developer.nijat@gmail.com
+
 Website: aliyev.dev
