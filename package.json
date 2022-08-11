@@ -1,0 +1,36 @@
+{
+  "name": "nodejs-mongo-express-crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ./server.js",
+    "start:dev": "nodemon ./server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nijat Aliyev",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-graphql": "^0.12.0",
+    "express-jwt": "^7.7.5",
+    "graphql": "^16.5.0",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.8.1",
+    "mongoose": "^6.5.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.7.7",
+    "rootpath": "^0.1.2",
+    "swagger-ui-express": "^4.5.0",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
