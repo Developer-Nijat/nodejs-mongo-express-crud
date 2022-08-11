@@ -13,6 +13,6 @@ Features:
 9. Config.json and .env usage
 10. Rootpath
 
-_Developed by Nijat Aliyev.
-_Email: developer.nijat@gmail.com
-_Website: aliyev.dev
+__ Developed by Nijat Aliyev.
+__ Email: developer.nijat@gmail.com
+__ Website: aliyev.dev
