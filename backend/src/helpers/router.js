@@ -8,4 +8,5 @@ router.use("/jokes", require("src/helpers/base.crud")(models.Joke));
 router.use("/books", require("src/helpers/base.crud")(models.Book));
 router.use("/accounts", require("src/collections/account/account.controller"));
 
+
 module.exports = router;

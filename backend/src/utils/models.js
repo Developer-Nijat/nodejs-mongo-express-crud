@@ -19,21 +19,23 @@ refreshTokenSchema.virtual("isActive").get(function () {
   return !this.revoked && !this.isExpired;
 });
 
-// =====Joke Model=====
-const jokesSchema = new Schema(
-  {
-    content: String,
-    created: { type: Date, default: Date.now },
-  },
-  { strict: false }
-);
-
 // =====Book Model=====
 const bookSchema = new Schema(
   {
     created: { type: Date, default: Date.now },
   },
   { strict: false }
+);
+
+// =====Joke Model=====
+const jokesSchema = new Schema(
+  {
+    jokeId: String,
+    title: String,
+    content: String,
+    category: String,
+  },
+  { strict: false, timestamps: true }
 );
 
 module.exports = {

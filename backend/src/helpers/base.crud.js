@@ -8,10 +8,10 @@ module.exports = (Collection) => {
     const newEntry = req.body;
     Collection.create(newEntry, (e, newEntry) => {
       if (e) {
-        console.log(e);
-        res.sendStatus(500);
+        console.log("baseCrud.create error: ", e.message || e);
+        res.status(400).send(e);
       } else {
-        res.send(newEntry);
+        res.status(201).send(newEntry);
       }
     });
   };
@@ -24,10 +24,10 @@ module.exports = (Collection) => {
 
     Collection.find(query, (e, result) => {
       if (e) {
-        res.status(500).send(e);
-        console.log(e.message);
+        console.log("baseCrud.find error: ", e.message || e);
+        res.status(400).send(e);
       } else {
-        res.send(result);
+        res.status(200).send(result);
       }
     });
   };
@@ -40,10 +40,10 @@ module.exports = (Collection) => {
 
     Collection.findById(_id, (e, result) => {
       if (e) {
-        res.status(500).send(e);
-        console.log(e.message);
+        console.log("baseCrud.findById error: ", e.message || e);
+        res.status(400).send(e);
       } else {
-        res.send(result);
+        res.status(200).send(result);
       }
     });
   };
@@ -54,8 +54,12 @@ module.exports = (Collection) => {
   const update = (req, res) => {
     const changedEntry = req.body;
     Collection.update({ _id: req.params._id }, { $set: changedEntry }, (e) => {
-      if (e) res.sendStatus(500);
-      else res.sendStatus(200);
+      if (e) {
+        console.log("baseCrud.update error: ", e.message || e);
+        res.status(400).send(e);
+      } else {
+        res.status(200).send({ message: "Successfully updated" });
+      }
     });
   };
 
@@ -64,8 +68,12 @@ module.exports = (Collection) => {
   // ======
   const remove = (req, res) => {
     Collection.remove({ _id: req.params._id }, (e) => {
-      if (e) res.status(500).send(e);
-      else res.sendStatus(200);
+      if (e) {
+        console.log("baseCrud.remove error: ", e.message || e);
+        res.status(400).send(e);
+      } else {
+        res.status(200).send({ message: "Successfully deleted" });
+      }
     });
   };
 

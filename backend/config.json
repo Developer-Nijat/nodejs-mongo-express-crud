@@ -1,0 +1,13 @@
+{
+  "connectionString": "yourMongoDbConnectionString",
+  "secret": "YCbo1GVJoMTngF0Irfxu10YSZc3716PZylonb8Bb",
+  "emailFrom": "",
+  "smtpOptions": {
+    "host": "",
+    "port": 465,
+    "auth": {
+      "user": "",
+      "pass": ""
+    }
+  }
+}
