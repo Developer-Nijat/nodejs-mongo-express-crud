@@ -11,7 +11,7 @@ const refreshTokenSchema = new Schema({
   revoked: Date,
   revokedByIp: String,
   replacedByToken: String,
-});
+},{ timestamps: true });
 refreshTokenSchema.virtual("isExpired").get(function () {
   return Date.now() >= this.expires;
 });
@@ -22,9 +22,12 @@ refreshTokenSchema.virtual("isActive").get(function () {
 // =====Book Model=====
 const bookSchema = new Schema(
   {
-    created: { type: Date, default: Date.now },
+    bookId: Number,
+    title: String,
+    author: String,
+    read: Boolean,
   },
-  { strict: false }
+  { timestamps: true }
 );
 
 // =====Joke Model=====
@@ -35,12 +38,12 @@ const jokesSchema = new Schema(
     content: String,
     category: String,
   },
-  { strict: false, timestamps: true }
+  { timestamps: true }
 );
 
 module.exports = {
-  Joke: mongoose.model("jokes", jokesSchema),
-  Book: mongoose.model("books", bookSchema),
+  Joke: mongoose.model("Joke", jokesSchema, "jokes"),
+  Book: mongoose.model("Book", bookSchema, "books"),
   RefreshToken: mongoose.model("RefreshToken", refreshTokenSchema),
   Account: require("src/collections/account/account.model"),
 };

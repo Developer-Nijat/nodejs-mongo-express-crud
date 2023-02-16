@@ -20,16 +20,32 @@ module.exports = (Collection) => {
   // Read many
   // =========
   const readMany = (req, res) => {
-    let query = res.locals.query || {};
+    const { _limit, _start, _sort, ...q } = req.query || {};
+    let sort = { createdAt: "desc" };
+    const limit = _limit || 5;
+    const start = _start || 0;
+    if (_sort) {
+      const splittedSort = _sort.split(":");
+      const property = splittedSort[0];
+      const value = splittedSort[1];
+      sort = { [property]: value };
+    }
+
+    const query = q || {}
 
     Collection.find(query, (e, result) => {
       if (e) {
         console.log("baseCrud.find error: ", e.message || e);
         res.status(400).send(e);
       } else {
-        res.status(200).send(result);
+        Collection.countDocuments(query, function (err, c) {
+          res.status(200).send({ result, count: c });
+        });
       }
-    });
+    })
+      .limit(limit)
+      .skip(start)
+      .sort(sort);
   };
 
   // ========

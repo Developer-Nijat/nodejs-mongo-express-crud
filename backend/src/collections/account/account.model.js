@@ -18,7 +18,7 @@ const schema = new Schema({
   passwordReset: Date,
   created: { type: Date, default: Date.now },
   updated: Date,
-});
+},{ timestamps: true });
 
 schema.virtual("isVerified").get(function () {
   return !!(this.verified || this.passwordReset);

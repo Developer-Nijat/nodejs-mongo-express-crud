@@ -33,6 +33,7 @@ require("src/utils/database");
 // Api Routes
 app.get('/', (req, res) => res.json("Server working..."))
 app.use('/api/v1', require('src/helpers/router'));
+app.use("/schema", require("src/controllers/schema.controller"));
 app.use("/auth", require("src/controllers/auth.controller"));
 app.use("/bulk", require("src/controllers/bulk.controller"));
 app.use("/upload", require("src/helpers/upload"));
