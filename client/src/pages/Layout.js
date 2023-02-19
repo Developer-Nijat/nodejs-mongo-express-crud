@@ -26,7 +26,7 @@ const Layout = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/jokes">
+              <Link className="nav-link" to="/dynamic-page/jokes">
                 Jokes
               </Link>
             </li>

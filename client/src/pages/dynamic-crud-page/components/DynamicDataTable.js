@@ -1,33 +1,30 @@
 import { Fragment } from "react";
-import BlockUi from 'react-block-ui';
+import BlockUi from "react-block-ui";
 
 const DynamicDataTable = ({ propertyNames, dataList, loading }) => {
   return (
     <Fragment>
       {dataList.length ? (
-        <div>
+        <div style={{ overflow: "auto" }}>
           <BlockUi tag="div" blocking={loading} message="Loading..." keepInView>
             <table className="table table-hover table-bordered">
               <thead className="thead-dark">
                 <tr>
-                  <th scope="col">#</th>
-                  {propertyNames.map((item) => (
-                    <th scope="col" key={item}>
-                      {item}
-                    </th>
-                  ))}
+                  {/* <th scope="col">#</th> */}
                   <th scope="col" style={{ width: 130 }}>
                     Actions
                   </th>
+                  {propertyNames.map((item) => (
+                    <th scope="col" key={item.key}>
+                      {item.key}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
                 {dataList.map((item, i) => (
                   <tr key={item._id}>
-                    <th scope="row">{i + 1}</th>
-                    {propertyNames.map((pn) => (
-                      <td key={"pn_" + pn}>{item[pn]}</td>
-                    ))}
+                    {/* <th scope="row">{i + 1}</th> */}
                     <td>
                       <div
                         className="btn-group"
@@ -51,6 +48,15 @@ const DynamicDataTable = ({ propertyNames, dataList, loading }) => {
                         </button>
                       </div>
                     </td>
+                    {propertyNames.map((pn) => (
+                      <td key={"pn_" + pn.key}>
+                        {pn.type === "Array"
+                          ? item[pn.key].length
+                          : pn.type === "ObjectId"
+                          ? item[pn.key]._id || item[pn.key]
+                          : item[pn.key]}
+                      </td>
+                    ))}
                   </tr>
                 ))}
               </tbody>

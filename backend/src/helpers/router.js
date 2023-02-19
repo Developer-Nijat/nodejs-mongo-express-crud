@@ -6,6 +6,7 @@ const models = require("./../utils/models");
 router.use("/swagger", require("src/helpers/swagger"));
 router.use("/jokes", require("src/helpers/base.crud")(models.Joke));
 router.use("/books", require("src/helpers/base.crud")(models.Book));
+router.use("/model-fields", require("src/helpers/base.crud")(models.ModelField));
 router.use("/accounts", require("src/collections/account/account.controller"));
 
 

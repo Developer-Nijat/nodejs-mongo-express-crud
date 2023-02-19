@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { modelData } from "../../utils/constants";
 import DynamicDataTable from "./components/DynamicDataTable";
@@ -9,6 +9,7 @@ const DynamicPage = () => {
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const { apiName } = useParams();
   const modelObj = modelData[apiName];
+  const modelFields = useRef([]);
 
   const [loading, setLoading] = useState(false);
   const [modelSchema, setModelSchema] = useState({});
@@ -23,8 +24,18 @@ const DynamicPage = () => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
+    fetchModelFields();
     fetchModelSchema();
   }, []);
+
+  async function fetchModelFields() {
+    try {
+      const res = (await axios.get(`${backendUrl}/api/v1/model-fields`)).data;
+      modelFields.current = res.result;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
 
   async function fetchModelSchema() {
     try {
@@ -40,7 +51,11 @@ const DynamicPage = () => {
       if (res?.data) {
         setModelSchema(res.data);
         const { _id, __v, ...rest } = res.data;
-        const objKeys = Object.keys(rest);
+        const objKeys = Object.entries(rest).map(([key, val]) => ({
+          key,
+          type: val.instance,
+          ref: val?.options?.ref || val?.options?.type?.[0]?.ref || null,
+        }));
         setPropertyNames(objKeys);
         fetchData(modelObj);
       }
