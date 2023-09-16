@@ -1,13 +1,13 @@
 import axios from "axios";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
 import { modelData } from "../../utils/constants";
 import DynamicDataTable from "./components/DynamicDataTable";
 import DynamicPagination from "./components/DynamicPagination";
 
 const DynamicPage = () => {
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
-  const { apiName } = useParams();
+  const arrayPath = window.location.pathname.split("/");
+  const apiName = arrayPath.pop();
   const modelObj = modelData[apiName];
   const modelFields = useRef([]);
 
@@ -57,7 +57,7 @@ const DynamicPage = () => {
           ref: val?.options?.ref || val?.options?.type?.[0]?.ref || null,
         }));
         setPropertyNames(objKeys);
-        fetchData(modelObj);
+        fetchData();
       }
       setTimeout(() => {
         setLoading(false);
@@ -118,6 +118,7 @@ const DynamicPage = () => {
           </h1>
         )}
         <DynamicDataTable
+          modelFields={modelFields.current}
           dataList={dataList}
           propertyNames={propertyNames}
           loading={loading}
