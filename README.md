@@ -14,5 +14,7 @@ Features:
 10. Rootpath
 11. Bulk insert & update. insertMany and updateMany
 12. Convert Excel to JSON in ReactJS
+13. Logger Middleware - Morgan
+14. Logs API - List, Export to CSV
 
 > Developed by Nijat Aliyev

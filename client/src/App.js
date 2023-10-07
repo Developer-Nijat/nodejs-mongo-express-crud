@@ -10,8 +10,10 @@ import {
 } from "reactstrap";
 import { read, utils } from "xlsx";
 import axios from "axios";
+import LogComponent from "./components/Log";
 
 import "./App.css";
+import DataGrid from "./components/CustomDataGrid";
 
 const requiredFields = ["ID", "Title", "Content", "Category"];
 
@@ -213,6 +215,10 @@ function App() {
         </h4>
         <button onClick={fetchData}>Refresh</button>
         {renderDataTable()}
+        <hr />
+        <LogComponent />
+        <hr />
+        <DataGrid />
       </div>
     </Fragment>
   );

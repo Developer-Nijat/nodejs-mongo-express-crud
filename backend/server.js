@@ -9,6 +9,7 @@ const { graphqlHTTP } = require('express-graphql');
 // Custom Imports
 const errorHandler = require("src/middleware/error-handler");
 const graphqlService = require("src/services/graphql.service");
+const loggerMiddleware = require("./src/middleware/logger.middleware");
 
 // Initial Config
 const app = express();
@@ -18,6 +19,7 @@ const port = process.env.SERVER_PORT || 4000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(loggerMiddleware);
 
 // allow cors requests from any origin and with credentials
 app.use(
@@ -35,6 +37,7 @@ app.get('/', (req, res) => res.json("Server working..."))
 app.use('/api/v1', require('src/helpers/router'));
 app.use("/auth", require("src/controllers/auth.controller"));
 app.use("/bulk", require("src/controllers/bulk.controller"));
+app.use("/log", require("src/controllers/log.controller"));
 app.use("/upload", require("src/helpers/upload"));
 app.use('/graphql', graphqlHTTP({
   schema: graphqlService.schema,
