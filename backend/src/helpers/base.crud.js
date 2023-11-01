@@ -20,7 +20,7 @@ module.exports = (Collection) => {
   // Read many
   // =========
   const readMany = (req, res) => {
-    let query = res.locals.query || {};
+    let query = req.query || {};
 
     Collection.find(query, (e, result) => {
       if (e) {
