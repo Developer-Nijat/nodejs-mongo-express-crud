@@ -34,6 +34,7 @@ require("src/utils/database");
 
 // Api Routes
 app.get('/', (req, res) => res.json("Server working..."))
+app.use("/group-by", require("src/controllers/dynamicGroupBy.controller"));
 app.use('/api/v1', require('src/helpers/router'));
 app.use("/auth", require("src/controllers/auth.controller"));
 app.use("/bulk", require("src/controllers/bulk.controller"));

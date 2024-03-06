@@ -14,6 +14,7 @@ import LogComponent from "./components/Log";
 
 import "./App.css";
 import DataGrid from "./components/CustomDataGrid";
+import DynamicGroupBy from "./components/DynamicGroupBy";
 
 const requiredFields = ["ID", "Title", "Content", "Category"];
 
@@ -175,10 +176,42 @@ function App() {
   return (
     <Fragment>
       <h3 className="text-center mt-4 mb-4">
-        NodeJs & React. Multi Insert and Multi Update from Excel document
+        NodeJs & React | DynamicGroupBy Charts
       </h3>
       <div className="container">
-        <Row>
+        <div className="row">
+          <DynamicGroupBy
+            title={"Jokes Categories"}
+            type="single"
+            collectionName="jokes"
+            groupByKey="category"
+          />
+          <DynamicGroupBy
+            title={"Jokes Content"}
+            type="single"
+            collectionName="jokes"
+            groupByKey="content"
+          />
+
+          <DynamicGroupBy
+            dateFilter={"not"}
+            title={"Book nested example"}
+            type="nested"
+            collectionName="books"
+            nestedCollectionName="jokes"
+            groupByKey="joke"
+            groupByChildKey="category"
+          />
+
+          {/* <DynamicGroupBy
+            title={"Books Titles"}
+            type="single"
+            collectionName="books"
+            groupByKey="title"
+          /> */}
+        </div>
+
+        {/* <Row>
           <Col md="6 text-left">
             <FormGroup>
               <Input
@@ -218,7 +251,7 @@ function App() {
         <hr />
         <LogComponent />
         <hr />
-        <DataGrid />
+        <DataGrid /> */}
       </div>
     </Fragment>
   );
