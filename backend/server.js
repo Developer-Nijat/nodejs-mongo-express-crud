@@ -39,6 +39,7 @@ app.use('/api/v1', require('src/helpers/router'));
 app.use("/auth", require("src/controllers/auth.controller"));
 app.use("/bulk", require("src/controllers/bulk.controller"));
 app.use("/log", require("src/controllers/log.controller"));
+app.use("/book", require("src/controllers/book.controller"));
 app.use("/upload", require("src/helpers/upload"));
 app.use('/graphql', graphqlHTTP({
   schema: graphqlService.schema,
